@@ -84,7 +84,7 @@ func (s *Server) handleServerCrash() error {
  		data += "\n" + line
  	}
 
-	data += "\n" + ("Out of memory: %t", oomKilled)
+	data += "\n" + fmt.Sprintf("Out of memory: %t", oomKilled)
  
  	postErr := s.client.SendCrashLogs(s.Context(), s.Config().Uuid, data)
  
