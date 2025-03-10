@@ -1,28 +1,28 @@
-+package filesystem
-+
-+import (
-+	"bytes"
-+	"strconv"
-+)
-+
-+func isIgnoredInCurseForgeFingerprint(b byte) bool {
-+	return b == '\t' || b == '\n' || b == '\r' || b == ' '
-+}
-+
-+func computeCurseForgeFingerprintNormalizedLength(buf *bytes.Buffer) int {
-+	var len_no_whitespace int = 0
-+	bytes := buf.Bytes()
-+
-+	for i := 0; i < buf.Len(); i++ {
-+		char := bytes[i]
-+		if !isIgnoredInCurseForgeFingerprint(char) {
-+			len_no_whitespace++
-+		}
-+	}
-+
-+	return len_no_whitespace
-+}
-+
+package filesystem
+
+import (
+	"bytes"
+	"strconv"
+)
+
+func isIgnoredInCurseForgeFingerprint(b byte) bool {
+	return b == '\t' || b == '\n' || b == '\r' || b == ' '
+}
+
+func computeCurseForgeFingerprintNormalizedLength(buf *bytes.Buffer) int {
+	var len_no_whitespace int = 0
+	bytes := buf.Bytes()
+
+	for i := 0; i < buf.Len(); i++ {
+		char := bytes[i]
+		if !isIgnoredInCurseForgeFingerprint(char) {
+			len_no_whitespace++
+		}
+	}
+
+	return len_no_whitespace
+}
+
 // https://github.com/meza/curseforge-fingerprint/blob/main/src/addon/fingerprint.cpp#L36
 func CalculateCurseForgeFingerprint(buf *bytes.Buffer) string {
 	const multiplex = 1540483477
